@@ -1,4 +1,4 @@
-﻿namespace DuckSimulator
+﻿namespace DuckSimulator.Ducks
 {
     public class MallardDuck : Duck
     {

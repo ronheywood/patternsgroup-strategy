@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DuckSimulator
+namespace DuckSimulator.Ducks
 {
     public class Duck
     {
@@ -16,17 +16,17 @@ namespace DuckSimulator
             return _name;
         }
 
-        public void Display()
+        public virtual void Display()
         {
             Console.Write($"{_name}\r\n");
         }
 
-        public void Swim()
+        public virtual void Swim()
         {
             Console.Write($"\r\n{_name} is swimming.");
         }
 
-        public void Quack()
+        public virtual void Quack()
         {
             Console.Write($"\r\n{_name} says \"Quack\".");
         }
