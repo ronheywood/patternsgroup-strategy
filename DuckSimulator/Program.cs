@@ -3,42 +3,41 @@ using System.Collections.Generic;
 
 namespace DuckSimulator
 {
-    class Program
+    internal class Program
     {
-        private static readonly List<string> DuckList = new List<string>(){ "Mallard Duck", "Redhead Duck" };
-        
+        private static readonly DuckSimulator DuckSimulator = new DuckSimulator(new List<Duck>() { new MallardDuck(), new RedheadDuck(), new RubberDuck() });
+
         private static void Main()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             
             Console.WriteLine("Welcome to DuckSimulator!");
-            
-            SimulateDucks();
+
+            DuckSimulator.SimulateDucks();
             AwaitUserAction();
-            MakeDucksSwim();
-            Console.ReadKey();
         }
 
         private static void AwaitUserAction()
         {
             Console.WriteLine("\r\nPress the [s] key to make them swim about!");
+            Console.WriteLine("Press the [q] key to hear them quack!");
+            Console.WriteLine("(Press escape to exit)");
+
             var key = new ConsoleKeyInfo();
-            while (key.KeyChar != 's')
+            while (key.Key != ConsoleKey.Escape)
             {
                 key = Console.ReadKey(true);
+                switch (key.KeyChar)
+                {
+                    case 's':
+                        DuckSimulator.MakeDucksSwim();
+                        break;
+                    case 'q':
+                        DuckSimulator.MakeDucksQuack();
+                        break;
+                    default: continue;
+                }
             }
-        }
-
-        private static void SimulateDucks()
-        {
-            Console.WriteLine("Look at all of the lovely ducks!");
-            DuckList.ForEach(d => Console.Write($"{d}\r\n"));
-        }
-
-        private static void MakeDucksSwim()
-        {
-            DuckList.ForEach(d => Console.Write($"\r\n{d} is swimming."));
-            Console.WriteLine("\r\nWow! The ducks are all swimming around. It's so realistic!");
         }
     }
 }
